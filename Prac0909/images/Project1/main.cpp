@@ -10,8 +10,6 @@ int main(int argc, char** argv) {
 	Mat image;
 	char* imageName = argv[1];
 	
-	image = imread(".. / .. / .. / rabbit.jpg");
-	
 	image = imread(imageName,
 		IMREAD_COLOR);
 	if (argc != 2 || !image.data) {
