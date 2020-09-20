@@ -4,10 +4,10 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/xfeatures2d.hpp>
 
-using namespace std;  //simple contrast
-using namespace cv;   //simple brightness
-double alpha; 
-int beta; 
+using namespace std;  
+using namespace cv;   
+double alpha; //simple contrast
+int beta; //simple brightness
 int main(int argc, char** argv) {
 	/// Read image given by user
 	Mat image = imread(argv[1]);
