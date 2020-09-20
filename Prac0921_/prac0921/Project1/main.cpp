@@ -4,8 +4,6 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/xfeatures2d.hpp>
 
-using namespace std;
-using namespace cv;
 double alpha; /**< Simple contrast control */
 int beta; /**< Simple brightness control */
 int main(int argc, char** argv) {
@@ -13,12 +11,12 @@ int main(int argc, char** argv) {
 	Mat image = imread(argv[1]);
 	Mat new_image = Mat::zeros(image.size(), image.type());
 	/// Initialize values
-	cout << " Basic Linear Transforms " << endl;
-	coud << "-------------------" << endl;
-	cout << "* Enter the alpha value [1.0-3.0]: ";
-	cin >> alpha;
-	cout << "* Enter the beta value [0-100]: ";
-	cin >> beta;
+	std::cout << " Basic Linear Transforms " << std::endl;
+	std::cout << "-------------------------" << std::endl;
+	std::cout << "* Enter the alpha value [1.0-3.0]: ";
+	std::cin >> alpha;
+	std::cout << "* Enter the beta value [0-100]: ";
+	std::cin >> beta;
 	/// Do the operation new_image(i,j) = alpha*image(i,j) + beta
 	for (int y = 0; y < image.rows; y++) {
 		for (int x = 0; x < image.cols; x++) {
