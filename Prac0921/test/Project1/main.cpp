@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
 	Mat image, result;
 	int th = 128;
 
-	image = imread(argv[1], 0); // 1 이면 컬러 0 이면 흑백
+	image = imread(argv[1], 1); // 1 이면 컬러 0 이면 흑백
 	result = image.clone();  // 이미지의 크기, depth 등을 모두 같게 하는 것
 
 	namedWindow("original");
@@ -23,6 +23,40 @@ int main(int argc, char** argv) {
 	for (int x = 0; x < image.rows; x++) {
 		for (int y = 0; y < image.cols; y++) {
 			//result.at<uchar>(x, y) = 255 - image.at<uchar>(x, y);
+			int r, g, b, max;
+			b = image.at<Vec3b>(x, y)[0];
+			g = image.at<Vec3b>(x, y)[1];
+			r = image.at<Vec3b>(x, y)[2];
+
+			if (r < g) {
+				max = g;
+				if (max < b) {
+					result.at<Vec3b>(x, y) = b;
+				}
+				else {
+					result.at<Vec3b>(x, y) = g;
+				}
+			}
+			else if (g < b) {
+				max = b;
+				if (max < r) {
+					result.at<Vec3b>(x, y) = r;
+				}
+				else {
+					result.at<Vec3b>(x, y) = b;
+				}
+			}
+			else if (g < r) {
+				max = r;
+				if (max < b) {
+					result.at<Vec3b>(x, y) = b;
+				}
+				else {
+					result.at<Vec3b>(x, y) = r;
+				}
+			}
+
+			/*
 			//이진화 하기 
 			int value = image.at<uchar>(x, y);
 
@@ -32,6 +66,7 @@ int main(int argc, char** argv) {
 			else {
 				result.at<uchar>(x, y) = 0;
 			}
+			*/
 			/*
 			result.at<Vec3b>(x, y)[0] = 255 - image.at<Vec3b>(x, y)[0];  //biue
 			result.at<Vec3b>(x, y)[1] = 255 - image.at<Vec3b>(x, y)[1];  //green
@@ -40,8 +75,8 @@ int main(int argc, char** argv) {
 		}
 	}
 	
-	namedWindow("binary image");
-	imshow("binary image", result);
+	namedWindow("color binary image");
+	imshow("color binary image", result);
 
 
 	waitKey();

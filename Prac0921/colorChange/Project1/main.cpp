@@ -7,6 +7,45 @@
 using namespace std;  
 using namespace cv;   
 
+
+void salt(Mat& img, int n); // 잡음 추가 함수 선언
+int main(int argc, char** argv)
+{
+	//--OpenCV 2.x 구쐼?현o --//
+	Mat image, result;
+	image = imread("../../../../images/moose.jpg", IMREAD_COLOR); // Read the file
+	if (image.empty()) { // Check for invalid input
+		cout << "Could not open or find the image" << std::endl;
+		return -1;
+	}
+	namedWindow("Display window", WINDOW_AUTOSIZE); // Create a window for display.
+	imshow("Display window", image); // Show our image inside it.
+	result = image.clone();
+	salt(result, 3000);
+	namedWindow("Processed image"); // Create a window for display.
+	imshow("Processed image", result);// Show our image inside it.
+	waitKey(0); // Wait for a keystroke in the window
+	destroyAllWindows();
+	return 0;
+}
+
+void salt(Mat& img, int n)
+{
+	for (int k = 0; k < n; k++) {
+		int i = rand() % img.cols;
+		int j = rand() % img.rows;
+		if (img.channels() == 1) { // Gray scale image
+			img.at<uchar>(j, i) = 255;
+		}
+		else if (img.channels() == 3) { // Color image
+			img.at<Vec3b>(j, i)[0] = 255;
+			img.at<Vec3b>(j, i)[1] = 255;
+			img.at<Vec3b>(j, i)[2] = 255;
+		}
+	}
+}
+
+/*
 int main(int argc, char** argv) {
 	Mat image;
 	char* imageName = argv[1];
@@ -57,9 +96,12 @@ int main(int argc, char** argv) {
 	channels.push_back(bgr[2]);
 	merge(channels, merged_img); */
 	//-- Method 2 --//
+	/*
 	merge(bgr, 3, merged_img);
 	namedWindow("Merged image", 1);
 	imshow("Merged image", merged_img);
 	waitKey(0);
 	return 0;
 }
+
+*/
