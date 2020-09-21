@@ -1,4 +1,56 @@
-/*#include <opencv2/core.hpp>
+#include <opencv2/core.hpp>
+#include <opencv2/videoio.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/xfeatures2d.hpp>
+#include <iostream>
+
+
+using namespace std;
+using namespace cv;
+
+int main(int argc, char** argv) {
+	Mat image, result;
+	int th = 128;
+
+	image = imread(argv[1], 0); // 1 이면 컬러 0 이면 흑백
+	result = image.clone();  // 이미지의 크기, depth 등을 모두 같게 하는 것
+
+	namedWindow("original");
+	imshow("original", image);
+
+	//processing algorithms
+	for (int x = 0; x < image.rows; x++) {
+		for (int y = 0; y < image.cols; y++) {
+			//result.at<uchar>(x, y) = 255 - image.at<uchar>(x, y);
+			//이진화 하기 
+			int value = image.at<uchar>(x, y);
+
+			if (value > th) {
+				result.at<uchar>(x, y) = 255;
+			}
+			else {
+				result.at<uchar>(x, y) = 0;
+			}
+			/*
+			result.at<Vec3b>(x, y)[0] = 255 - image.at<Vec3b>(x, y)[0];  //biue
+			result.at<Vec3b>(x, y)[1] = 255 - image.at<Vec3b>(x, y)[1];  //green
+			result.at<Vec3b>(x, y)[2] = 255 - image.at<Vec3b>(x, y)[2];   //red
+			*/
+		}
+	}
+	
+	namedWindow("binary image");
+	imshow("binary image", result);
+
+
+	waitKey();
+
+	return 0;
+}
+
+/*
+#include <opencv2/core.hpp>
 #include <opencv2/videoio.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
@@ -38,6 +90,7 @@ int main(int argc, char** argv) {
 	return 0;
 }
 */
+/*
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -71,3 +124,5 @@ int main()
 	return 0;
 
 }
+
+*/
