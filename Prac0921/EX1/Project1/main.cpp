@@ -28,34 +28,21 @@ int main(int argc, char** argv) {
 			g = image.at<Vec3b>(x, y)[1];
 			r = image.at<Vec3b>(x, y)[2];
 
-			if (r < g) {
-				max = g;
-				if (max < b) {
-					result.at<Vec3b>(x, y) = b;
-				}
-				else {
-					result.at<Vec3b>(x, y) = g;
-				}
+			if ( (r>g) && (r>b) ) {
+				result.at<Vec3b>(x,y)[2] = 255;
+				result.at<Vec3b>(x, y)[0] = 0;
+				result.at<Vec3b>(x, y)[1] = 0;
+			
+			}else if ((g > r) && (g > b)) {
+				result.at<Vec3b>(x, y)[1] = 255;
+				result.at<Vec3b>(x, y)[0] = 0;
+				result.at<Vec3b>(x, y)[2] = 0;
+			
+			}else if ((b > r) && (b > g)) {
+				result.at<Vec3b>(x, y)[0] = 255;
+				result.at<Vec3b>(x, y)[1] = 0;
+				result.at<Vec3b>(x, y)[2] = 0;
 			}
-			else if (g < b) {
-				max = b;
-				if (max < r) {
-					result.at<Vec3b>(x, y) = r;
-				}
-				else {
-					result.at<Vec3b>(x, y) = b;
-				}
-			}
-			else if (g < r) {
-				max = r;
-				if (max < b) {
-					result.at<Vec3b>(x, y) = b;
-				}
-				else {
-					result.at<Vec3b>(x, y) = r;
-				}
-			}
-
 			/*
 			//이진화 하기 
 			int value = image.at<uchar>(x, y);
