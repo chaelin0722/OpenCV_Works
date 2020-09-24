@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 			r = image.at<Vec3b>(x, y)[2];
 
 			if ( (r>g) && (r>b) ) {
-				result.at<Vec3b>(x,y)[2] = 255;
+				result.at<Vec3b>(x, y)[2] = 255;
 				result.at<Vec3b>(x, y)[0] = 0;
 				result.at<Vec3b>(x, y)[1] = 0;
 			
@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 				result.at<Vec3b>(x, y)[0] = 255;
 				result.at<Vec3b>(x, y)[1] = 0;
 				result.at<Vec3b>(x, y)[2] = 0;
-			}
+			}  // 이 외에 더 세부적인 조건 설정 필요! 아니면 흰색 검정색도 나오게 되어있음 
 			/*
 			//이진화 하기 
 			int value = image.at<uchar>(x, y);

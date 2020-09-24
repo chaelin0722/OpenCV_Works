@@ -128,13 +128,13 @@ int main(int argc, char** argv)
 	imshow("Pixel Processing", result);
 
 
-	//Mat merged_img;
+	Mat merged_img;
 	//-- Mtehod 1 --//
-	/*vector<Mat> channels;
+	vector<Mat> channels;
 	channels.push_back(bgr[0]);
 	channels.push_back(bgr[1]);
 	channels.push_back(bgr[2]);
-	merge(channels, merged_img); */
+	merge(channels, merged_img); 
 	//-- Method 2 --//
 	/*
 	merge(bgr, 3, merged_img);
