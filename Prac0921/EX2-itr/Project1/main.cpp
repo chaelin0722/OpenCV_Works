@@ -63,9 +63,8 @@ int main(int argc, char** argv)
 void colorReduceI(Mat& image, int div) {
 	Mat_<Vec3b>::iterator it = image.begin<Vec3b>();
 	Mat_<Vec3b>::iterator itend = image.end<Vec3b>();
-	//모든 화소 조회¸ //
+	//모든 화소 조회하면서 개별처리해줌 
 	for (; it != itend; ++it) {
-		//--- 개별화소 처리---//
 		(*it)[0] = (*it)[0] / div * div + div / 2;
 		(*it)[1] = (*it)[1] / div * div + div / 2;
 		(*it)[2] = (*it)[2] / div * div + div / 2;
@@ -74,23 +73,22 @@ void colorReduceI(Mat& image, int div) {
 // pointer로 구현
 void colorReduceP(Mat& image, int div) {
 	int nl = image.rows;//행개수
-	int nc = image.cols * image.channels();//각행의 데이터 개수
+	int nc = image.cols * image.channels();
+
 	for (int j = 0; j < nl; j++) {
-		//-- j열의 주소 (nc 개만큼) 가져오기 --//
 		uchar* data = image.ptr<uchar>(j);
 		for (int i = 0; i < nc; i++) {
-			//---각 화소값 분할--//
 			data[i] = data[i] / div * div + div / 2;
 		}
 	}
 }
 void colorReduceA(Mat& image, int div) {
-	int nl = image.rows;//행 개수
-	int nc = image.cols; //열 개수
-	//모든 화소 조회¸ //
+	int nl = image.rows;
+	int nc = image.cols; 
+	//모든 화소 조회
 	for (int j = 0; j < nl; j++) {
 		for (int i = 0; i < nc; i++) {
-			//---각화소 처리--//
+			//각화소 처리
 			image.at<Vec3b>(j, i)[0] = image.at<Vec3b>(j, i)[0] / div * div + div / 2;
 			image.at<Vec3b>(j, i)[1] = image.at<Vec3b>(j, i)[1] / div * div + div / 2;
 			image.at<Vec3b>(j, i)[2] = image.at<Vec3b>(j, i)[2] / div * div + div / 2;
