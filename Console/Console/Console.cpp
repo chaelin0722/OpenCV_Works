@@ -53,13 +53,20 @@ public:
 		}
 		return histImg;
 	}
-};
+	// Equalizes the source image.
+	MatND equalize(const cv::Mat& image) {
+		cv::Mat result;
+		cv::equalizeHist(image, result);
+		return result;
+	}
+}; //클래스 선언 종료
 
 int main(int argc, char** argv)
 {
-	Mat image, dst;
+	Mat image, image2, dst;
+	/*
 	/// Load image
-	image = imread(argv[1], 0); // Read the file as grayscale image
+	image = imread(argv[1], 1); // Read the file as grayscale image
 
 	if (image.empty()) {
 		cout << "Could not open or find the image" << std::endl;
@@ -69,9 +76,10 @@ int main(int argc, char** argv)
 	namedWindow("Display window");
 	imshow("Display window", image);
 	Histogram1D h; // 히스토그램을 위한 객체
+
 	MatND histo = h.getHistogram(image); // 히스토그램 계산
 	for (int i = 0; i < 256; i++) // 히스토그램의 빈도를 조회
-		cout << "Value" << i << "=" << histo.at<float>(i) << std::endl;
+		cout << "Value" << i << "=" << histo.at<float>(i) << endl;
 	// 히스토그램을 영상으로 띄우기
 	namedWindow("Histogram");
 	imshow("Histogram", h.getHistogramImage(image));
@@ -81,6 +89,25 @@ int main(int argc, char** argv)
 	// 영상을 경계화 하기 위해 히스토그램의 높은 봉우리(60) 방향으로 증가하기 직전인 최소값으로 정함
 	namedWindow("Binary Image");
 	imshow("Binary Image", thresholdedImage);
+
+	*/
+	image2 = imread(argv[1], 0);
+
+	if (image2.empty()) {
+		cout << "Could not open or find the image" << endl;
+		return -1;
+	}
+	Histogram1D e;  // 이진화를 위한 객체
+	// Equalize the image
+	MatND eqHist = e.equalize(image2);
+	// Show the result
+	namedWindow("Equalized Image");
+	imshow("Equalized Image", eqHist);
+	// Show the new histogram
+	namedWindow("Equalized Histogram");
+	imshow("Equalized Histogram", e.getHistogramImage(eqHist));
+
+
 	waitKey(0);	return 0;}
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
