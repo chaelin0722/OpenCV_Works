@@ -13,7 +13,7 @@ void colorReduceA(Mat& image, int div);
 int main(int argc, char** argv)
 {
 	Mat image, result_ptr, result_itr, result_at;
-	int t_ptr, t_itr, t_at;
+	double t_ptr, t_itr, t_at;
 	image = imread(argv[1]); 
 
 	//예외처리
@@ -28,16 +28,16 @@ int main(int argc, char** argv)
 	result_itr = image.clone();
 	result_at = image.clone();
 	// 포인터 함수 적용과 실행 시간 측정
-	t_ptr = getTickCount();
+	t_ptr = (double)getTickCount();
 	colorReduceP(result_ptr, 64);
 	t_ptr = ((double)getTickCount() - t_ptr) / getTickFrequency();
 	// iterator 함수 적용과 실행시간 측정
-	t_itr = getTickCount();
+	t_itr = (double)getTickCount();
 	colorReduceI(result_itr, 64);
 	t_itr = ((double)getTickCount() - t_itr) / getTickFrequency();
 
 	// at 함수 적용과 실행시간 측정
-	t_at = getTickCount();
+	t_at = (double)getTickCount();
 	colorReduceA(result_at, 64);
 	t_at = ((double)getTickCount() - t_at) / getTickFrequency();
 
