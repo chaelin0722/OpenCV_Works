@@ -135,8 +135,8 @@ int main(int argc, char** argv)
 	imshow("Binary Image", thresholdedImage);
 
 	*/
-
-	/*   //Equalization 부분 
+	
+	//Equalization 부분 
 	image2 = imread(argv[1], 0);
 
 	if (image2.empty()) {
@@ -154,7 +154,7 @@ int main(int argc, char** argv)
 	imshow("Equalized Histogram", e.getHistogramImage(eqHist));
 
 
-	waitKey(0);	*/	Mat image3;	image3 = imread(argv[1], 1);
+	waitKey(0);		/*	Mat image3;	image3 = imread(argv[1], 1);
 	if (image3.empty()) {
 		cout << "Could not open or find the image" << endl;
 		return -1;
@@ -166,4 +166,4 @@ int main(int argc, char** argv)
 	// 히스토그램을 영상으로 띄우기
 	namedWindow("Color Histogram");
 	imshow("Color Histogram", Chist);
-	waitKey(0);	return 0;}
+	waitKey(0);	*/	return 0;}

@@ -14,6 +14,7 @@ int w = 512;// 생성 영상의 크기 설정
 void MyLine(Mat img, Point start, Point end);
 void MyEllipse(Mat img, double angle);
 void MyFilledCircle(Mat img, Point center);
+
 int main(int argc, char** argv)
 {
 	int k;
