@@ -19,13 +19,12 @@ int main(int argc, char** argv) {
 	Mat gray_image;
 	cvtColor(image, gray_image,
 		COLOR_BGR2GRAY);
-	namedWindow(imageName,
-		WINDOW_AUTOSIZE);
-	namedWindow("Gray image",
-		WINDOW_AUTOSIZE);
+	namedWindow(imageName);
+	namedWindow("Gray image");
 	imshow(imageName, image);
 	imshow("Gray image", gray_image);
 	
 	waitKey(0);
 	return 0;
 }
+
