@@ -7,7 +7,7 @@
 
 using namespace cv;
 using namespace std;
-/*
+
 int main(int argc, char** argv) {
 
 	Mat image, result;
@@ -62,44 +62,5 @@ int main(int argc, char** argv) {
 
 	waitKey(0);
 
-	return 0;
-}
-*/
-//Laplacian tutorial
-
-int main(int argc, char** argv) {
-
-	Mat src, src_gray, dst;
-	int kernel_size = 3;
-	int scale = 1;
-	int delta = 0;
-	int ddepth = CV_16S;
-
-	int c;
-
-	src = imread(argv[1], 1);
-
-	if (!src.data) {
-		cout << "Could not found imaage" << endl;
-		return -1;
-	}
-
-	namedWindow("Original image");
-	imshow("Original image", src);
-
-	GaussianBlur(src, src, Size(3, 3), 0, 0, BORDER_DEFAULT);
-
-	cvtColor(src, src_gray, COLOR_BGR2GRAY);
-
-	//apply laplace function
-	Mat abs_dst;
-	Laplacian(src_gray, dst, ddepth, kernel_size, scale, delta, BORDER_DEFAULT);
-	convertScaleAbs(dst, abs_dst);
-	/*gaussian blur 贸府 饶 laplacian 贸府 秦淋*/
-
-	namedWindow("Laplace Demo");
-	imshow("Laplace Demo", abs_dst);
-
-	waitKey(0);
 	return 0;
 }
