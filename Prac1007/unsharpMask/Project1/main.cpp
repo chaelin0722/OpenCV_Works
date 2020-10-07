@@ -8,7 +8,7 @@
 using namespace cv;
 using namespace std;
 
-//Unsharp Mask 이용 실습
+//Unsharp Mask 이용 실습  => 더 선명한 영상을 얻을 수 있다!
 int main(int argc, char** argv) {
 	Mat image, result, dst, dst1;
 
@@ -28,8 +28,11 @@ int main(int argc, char** argv) {
 	double threshold = 5;
 	double amount = 1;
 	GaussianBlur(image, blurred, Size(), sigma, sigma /*border type 은 default로 들어가게 되어있음*/); 
-	Mat lowContrastMask = abs(image - blurred) < threshold;  // 원본과 블러 처리된 이미지의 차이가 threshold 보다 작게 만듦..
-	Mat sharpened = image * (1 + amount) + blurred * (-amount);
+	Mat lowContrastMask;
+	lowContrastMask= abs(image - blurred) < threshold;  // 원본과 블러 처리된 이미지의 차이가 threshold 보다 작게 만듦..
+																// 교재의 smoothing f-hat(X,y) blurred signal 에 해당하는 듯.
+	Mat sharpened;
+	sharpened = image * (1 + amount) + blurred * (-amount);  // f(x,y) - f-hat(x,y) 
 	image.copyTo(sharpened, lowContrastMask);
 
 	namedWindow("Sharpened image");
