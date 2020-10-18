@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 	return 0;
 }
 */
-
+/*
 //noise 제거 실습
 void salt(Mat& img, int n);
 void saltPepper(Mat& img, int n);
@@ -128,4 +128,37 @@ void saltPepper(Mat& img, int n) {
 		}  
 	
 	}//end for
+}
+*/
+
+//unsharp mask 이용 실습
+
+int main(int argc, char** argv) {
+	Mat image, result, dst, dst1;
+
+	image = imread(argv[1], 1);
+
+	if (image.empty()) {
+		cout << "could not found" << endl;
+		return -1;
+	}
+
+	namedWindow("Original image");
+	imshow("Original image", image);
+
+	Mat blurred;
+	double sigma = 1;
+	double threshold = 5;
+	double amount = 1;
+	GaussianBlur(image, blurred, Size(), sigma, sigma);
+	Mat lowContrastMask = abs(image - blurred) < threshold;  //image 에서 블러를 빼면 unsharp 마스크가 만들어진다. 
+	Mat sharpened = image * (1 + amount) + blurred * (-amount);
+
+	image.copyTo(sharpened, lowContrastMask);
+
+	namedWindow("Sharpened image");
+	imshow("Sharpened image", sharpened);
+
+	waitKey(0);
+	return 0;
 }
