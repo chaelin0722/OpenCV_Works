@@ -1,3 +1,8 @@
+/*
+	text 그리고
+	두 이미지 블렌딩하기
+
+*/
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -67,9 +72,9 @@ int main(int argc, char** argv) {
 }
 
 void on_trackbar(int, void*) {
-	alpha = (double)alpha_slider / alpha_slider_max;
-	beta = (1.0 - alpha);
-	addWeighted(image1, alpha, image2, beta, 0.0, dst);
+	//alpha = (double)alpha_slider / alpha_slider_max;
+	//beta = (1.0 - alpha);
+	//addWeighted(image1, alpha, image2, beta, 0.0, dst);
 
 	threshold(image1, dst, alpha_slider, 255, THRESH_BINARY);
 	imshow("Display Blend",dst);

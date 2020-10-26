@@ -13,16 +13,12 @@ int main(int, char**)
 	Mat frame;
 	//--- INITIALIZE VIDEOCAPTURE
 	VideoCapture cap;
-	// open the default camera using default API
-	// cap.open(0);
-	// OR advance usage: select any API backend
 	int deviceID = 0;             // 0 = open default camera
 	int apiID = cv::CAP_ANY;      // 0 = autodetect default API
-	// open selected camera using selected API
-	cap.open(deviceID, apiID);
+	cap.open(deviceID + apiID);
 	// check if we succeeded
 	if (!cap.isOpened()) {
-		cerr << "ERROR! Unable to open camera\n";
+		cout << "ERROR! Unable to open camera\n";
 		return -1;
 	}
 	//--- GRAB AND WRITE LOOP
@@ -34,7 +30,7 @@ int main(int, char**)
 		cap.read(frame);
 		// check if we succeeded
 		if (frame.empty()) {
-			cerr << "ERROR! blank frame grabbed\n";
+			cout << "ERROR! blank frame grabbed\n";
 			break;
 		}
 		// show live and wait for a key with timeout long enough to show images
