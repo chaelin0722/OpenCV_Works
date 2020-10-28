@@ -248,7 +248,6 @@ int main(int argc, char** argv) {
 }
 void onMouse(int event, int x, int y, int f, void*) {
 	switch (event) {
-
 		case EVENT_LBUTTONDOWN :
 			clicked = true;
 			P1.x = x;

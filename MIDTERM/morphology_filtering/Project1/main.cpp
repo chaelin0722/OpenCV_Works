@@ -1,5 +1,13 @@
+/*
+	threshold
+	adaptive threshold
+	dilation erode open close
+	thinning
+	ximgproc
+	watershed
 
-#include <opencv2/core.hpp>
+*/
+#include <opencv2/core/core.hpp>
 #include <opencv2/videoio.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
@@ -56,10 +64,10 @@ void Threshold_Demo(int, void*) {
 	threshold(src_gray, dst, threshold_value, max_BINARY_value, threshold_type);
 	imshow("Threshold Demo", dst);
 }
-
 */
+
 // Adaptivethreshold() ÀÇ ¿¹Á¦ 
-/*
+
 int threshold_value = 0;
 int threshold_type = 2;
 int const max_value = 255;
@@ -79,6 +87,7 @@ int main(int argc, char** argv) {
 	cvtColor(image, src_gray, COLOR_BGR2GRAY);
 
 	namedWindow("Adaptive Threshold");
+
 
 	createTrackbar("Type:\n 0:Binary\n1:Binary\n2:Truncate\n3:To Zero\n 4:To Zero Inverted",
 		"Adaptive Threshold", &threshold_type, max_type, Threshold_Demo);
@@ -104,7 +113,7 @@ void Threshold_Demo(int, void*) {
 	imshow("Adaptive Threshold", dst);
 }
 
-*/
+
 
 //Dilation Erosion closed open
 /*
@@ -375,7 +384,7 @@ int main(int argc, char** argv) {
 */
 
 // watershed
-
+/*
 class WatershedSegmenter {
 
 private:
@@ -454,3 +463,4 @@ int main(int argc, char** argv) {
 	waitKey(0);
 	return 0;
 }
+*/
