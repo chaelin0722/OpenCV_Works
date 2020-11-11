@@ -8,6 +8,8 @@
 
 using namespace cv;
 using namespace std;
+//contour, convexhull, houghtransform
+/*
 //practice.exe ../../../../images/binaryGroup.bmp ../../../../images/group.jpg ../../../../images/group.jpg 
 // 위와 같이이미지 세개 argv 에서 받아야 함
 
@@ -93,6 +95,65 @@ int main(int argc, char** argv){
 	}
 	namedWindow("Some Shape descriptors");
 	imshow("Some Shape descriptors", result);
+	waitKey(0);
+	return 0;
+}
+
+*/
+#include <stdio.h>
+#include <iostream>
+#include <opencv2/core.hpp>
+#include "opencv2/opencv.hpp"
+#include "opencv2/calib3d.hpp"
+#include "opencv2/features2d.hpp"
+#include "opencv2/imgproc.hpp"
+#include "opencv2/imgcodecs.hpp"
+#include "opencv2/highgui.hpp"
+#include <opencv2/xfeatures2d.hpp>
+
+using namespace std;
+using namespace cv;
+using namespace cv::xfeatures2d;
+
+// Harris Corner Extractor
+int main(int argc, char** argv){
+
+	Mat image = imread(argv[1], 0);
+	if (!image.data) return -1;
+	
+	namedWindow("Original Image");
+	imshow("Original Image", image);
+	// Detect Harris Corners
+	Mat cornerStrength;
+	cv::cornerHarris(image, cornerStrength, // Corner score 계산
+		3, // neighborhood size
+		3, // aperture size
+		0.01); // Harris parameter
+		// threshold the corner strengths
+
+	Mat harrisCorners;
+	double threshold = 0.0001; // C: corner value
+	cv::threshold(cornerStrength, harrisCorners, threshold, 255, THRESH_BINARY_INV); // 큰 Score만 선정
+	// Display the corners
+	namedWindow("Harris Corner Map");
+	imshow("Harris Corner Map", harrisCorners);
+
+	namedWindow("cornerStrength");
+	imshow("cornerStrength", cornerStrength);
+	vector<Point2f> corners;
+	goodFeaturesToTrack(image, corners,	500,// maximum number of corners to be returned
+		0.01,// quality level
+		10);// minimum allowed distance between points
+	// for all corners
+	vector<Point2f>::const_iterator it = corners.begin();
+	while (it != corners.end()) {
+		circle(image, *it, 3, cv::Scalar(255, 255, 255), 2);
+		++it;
+	}
+	// Display the corners
+	namedWindow("Good Features to Track");
+	imshow("Good Features to Track", image);
+
 	waitKey(0);
 	return 0;
 }
