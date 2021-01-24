@@ -6,6 +6,4 @@
 ### Project 2 : Road Lane Detection 
    houghTransform 을 사용해서 차선 가이드라인 제공
 ### Project 3: DeepLearning 
-
-
-### A+
+   tensorflow pre-trained model을 이용해 과자 세개 인식
